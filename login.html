@@ -1,32 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Login — Cadeira</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/app.js"></script>
+  <meta charset="UTF-8">
+  <title>Login — Cadeira</title>
+
+  <!-- estilos -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- app -->
+  <script src="js/app.js"></script>
 </head>
 <body>
-<header><h1>Entrar</h1></header>
+
+<header>
+  <h1>Entrar — Cadeira</h1>
+</header>
 
 <div class="container card">
-  <label>Seu nome</label>
-  <input id="nome" class="input">
 
-  <label>Seu e-mail</label>
-  <input id="email" class="input">
+  <!-- E-MAIL -->
+  <label for="email">E-mail</label>
+  <input id="email" class="input" placeholder="seuemail@exemplo.com">
 
-  <button class="btn btn-primary" onclick="
-    salvarUsuario(email.value, nome.value);
-    window.location='feed.html';
-  ">Entrar</button>
+  <!-- SENHA -->
+  <label for="senha">Senha</label>
 
-  <br><br>
+  <div style="display:flex; flex-direction:column; gap:4px;">
+    <input id="senha" type="password" class="input" placeholder="sua senha">
 
-  <!-- NOVO -->
-  <button class="btn" onclick="window.location='criar-conta.html'">
+    <small
+      style="cursor:pointer; color:#555;"
+      onclick="senha.type = senha.type === 'password' ? 'text' : 'password'">
+      👁️ Mostrar / ocultar senha
+    </small>
+  </div>
+
+  <!-- ENTRAR -->
+  <button class="btn btn-primary" style="margin-top:14px"
+    onclick="
+      login(email.value, senha.value).then(ok => {
+        if (ok) window.location='feed.html';
+      });
+    ">
+    Entrar
+  </button>
+
+  <!-- CRIAR CONTA -->
+  <button class="btn" style="margin-top:10px"
+    onclick="window.location='criar-conta.html'">
     Criar conta
   </button>
+
+  <!-- ESQUECI MINHA SENHA -->
+  <button class="btn" style="margin-top:10px"
+    onclick="
+      const e = prompt('Digite seu e-mail para recuperar a senha:');
+      if (e) recuperarSenha(e);
+    ">
+    Esqueci minha senha
+  </button>
+
 </div>
+
 </body>
 </html>
