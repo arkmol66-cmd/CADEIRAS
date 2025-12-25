@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Perfil — Cadeira</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
+</head>
+<body onload="
+  exigirLogin();
+  const u = usuarioAtual();
+  document.getElementById('nome').innerText = u.nome;
+  document.getElementById('email').innerText = u.email;
+">
+<header>
+  <h1>Meu Perfil</h1>
+  <nav>
+    <a href="feed.html">Feed</a>
+    <a href="shorts.html">Shorts</a>
+    <a href="fotos.html">Fotos</a>
+    <a href="#" onclick='sair()'>Sair</a>
+  </nav>
+</header>
+
+<div class="container card">
+  <img src="https://placekitten.com/200/200" class="avatar">
+  <h2 id="nome"></h2>
+  <p id="email"></p>
+
+  <a class="btn btn-primary" href="conversa.html">Criar conversa por e-mail</a>
+</div>
+</body>
+</html>
