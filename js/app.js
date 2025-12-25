@@ -1,4 +1,35 @@
-// Salvar usuário
+// ---------- CONTAS ----------
+function criarConta(nome, email, senha) {
+  const contas = JSON.parse(localStorage.getItem("contas") || "[]");
+
+  // já existe?
+  if (contas.find(c => c.email === email)) {
+    alert("Já existe uma conta com esse e-mail.");
+    return false;
+  }
+
+  contas.push({ nome, email, senha });
+  localStorage.setItem("contas", JSON.stringify(contas));
+
+  // loga automaticamente
+  salvarUsuario(email, nome);
+  return true;
+}
+
+function login(email, senha) {
+  const contas = JSON.parse(localStorage.getItem("contas") || "[]");
+  const conta = contas.find(c => c.email === email && c.senha === senha);
+
+  if (!conta) {
+    alert("E-mail ou senha incorretos.");
+    return false;
+  }
+
+  salvarUsuario(conta.email, conta.nome);
+  return true;
+}
+
+// ---------- SESSÃO ----------
 function salvarUsuario(email, nome) {
   localStorage.setItem("usuario", JSON.stringify({ email, nome }));
 }
@@ -12,12 +43,11 @@ function sair() {
   window.location = "login.html";
 }
 
-// Bloquear páginas sem login
 function exigirLogin() {
   if (!usuarioAtual()) window.location = "login.html";
 }
 
-// POSTS
+// ---------- POSTS ----------
 function salvarPost(texto) {
   const posts = JSON.parse(localStorage.getItem("posts") || "[]");
   posts.unshift({
@@ -39,7 +69,7 @@ function listarPosts(el) {
   `).join("");
 }
 
-// CONVERSAS
+// ---------- CONVERSAS ----------
 function salvarMensagem(email, texto) {
   const convs = JSON.parse(localStorage.getItem("conversas") || "{}");
   if (!convs[email]) convs[email] = [];
@@ -62,3 +92,4 @@ function listarMensagens(email, el) {
     </div>
   `).join("");
 }
+
