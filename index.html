@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadeira — Social</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<header>
+  <h1>🪑 Cadeira</h1>
+  <p>Shorts, fotos e posts rápidos</p>
+</header>
+
+<main id="auth">
+  <div class="card">
+    <h2>Entrar</h2>
+    <input id="loginEmail" type="email" placeholder="Email" />
+    <input id="loginPass" type="password" placeholder="Senha" />
+    <button onclick="login()">Entrar</button>
+
+    <p class="alt" onclick="toggleForms()">Criar conta</p>
+  </div>
+
+  <div class="card hidden" id="registerBox">
+    <h2>Criar conta</h2>
+    <input id="regName" type="text" placeholder="Nome" />
+    <input id="regEmail" type="email" placeholder="Email" />
+    <input id="regPass" type="password" placeholder="Senha" />
+    <button onclick="register()">Registrar</button>
+
+    <p class="alt" onclick="toggleForms()">Já tenho conta</p>
+  </div>
+</main>
+
+<section id="app" class="hidden">
+  <nav>
+    <span id="welcome"></span>
+    <button onclick="logout()">Sair</button>
+  </nav>
+
+  <div class="composer">
+    <textarea id="postText" maxlength="200" placeholder="Escreva um short (máx 200 caracteres)..."></textarea>
+
+    <input id="photo" type="file" accept="image/*" />
+
+    <button onclick="post()">Publicar</button>
+  </div>
+
+  <div id="feed"></div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
