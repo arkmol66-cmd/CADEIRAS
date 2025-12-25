@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Login — Cadeira</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
+</head>
+<body>
+<header><h1>Entrar</h1></header>
+
+<div class="container card">
+  <label>Seu nome</label>
+  <input id="nome" class="input">
+
+  <label>Seu e-mail</label>
+  <input id="email" class="input">
+
+  <button class="btn btn-primary" onclick="
+    salvarUsuario(email.value, nome.value);
+    window.location='feed.html';
+  ">Continuar</button>
+</div>
+</body>
+</html>
