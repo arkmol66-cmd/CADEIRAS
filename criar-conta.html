@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Criar conta — Cadeira</title>
+
+  <!-- estilos -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- app -->
+  <script src="js/app.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>Criar conta — Cadeira</h1>
+</header>
+
+<div class="container card">
+
+  <!-- NOME -->
+  <label for="nome">Nome</label>
+  <input id="nome" class="input" placeholder="Seu nome">
+
+  <!-- EMAIL -->
+  <label for="email">E-mail</label>
+  <input id="email" class="input" placeholder="seuemail@exemplo.com">
+
+  <!-- SENHA -->
+  <label for="senha">Senha</label>
+  <div style="display:flex; flex-direction:column; gap:4px;">
+    <input id="senha" type="password" class="input" placeholder="Crie uma senha">
+
+    <small
+      style="cursor:pointer; color:#555;"
+      onclick="senha.type = senha.type === 'password' ? 'text' : 'password'">
+      👁️ Mostrar / ocultar senha
+    </small>
+  </div>
+
+  <!-- CONFIRMAR -->
+  <label for="confirmar">Confirmar senha</label>
+  <input id="confirmar" type="password" class="input" placeholder="Repita a senha">
+
+  <!-- BOTÃO CRIAR -->
+  <button class="btn btn-primary" style="margin-top:14px"
+    onclick="
+      criarConta(
+        nome.value,
+        email.value,
+        senha.value,
+        confirmar.value
+      ).then(ok => {
+        if (ok) window.location='feed.html';
+      });
+    ">
+    Criar conta
+  </button>
+
+  <!-- VOLTAR PARA LOGIN -->
+  <button class="btn" style="margin-top:10px"
+    onclick='window.location="login.html"'>
+    Já tenho conta
+  </button>
+
+</div>
+
+</body>
+</html>
