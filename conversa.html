@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Conversas — Cadeira</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/app.js"></script>
+</head>
+<body onload="exigirLogin()">
+<header>
+  <h1>Conversas (por e-mail)</h1>
+  <nav>
+    <a href="feed.html">Feed</a>
+    <a href="perfil.html">Perfil</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card">
+    <label>E-mail da pessoa</label>
+    <input id="dest" class="input">
+
+    <label>Mensagem</label>
+    <textarea id="msg" class="input"></textarea>
+
+    <button class="btn btn-primary" onclick="
+      salvarMensagem(dest.value, msg.value);
+      listarMensagens(dest.value, document.getElementById('chat'));
+      msg.value='';
+    ">Enviar</button>
+  </div>
+
+  <div id="chat" class="card"></div>
+</div>
+</body>
+</html>
