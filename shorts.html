@@ -2,24 +2,71 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Shorts — Cadeira</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Cadeiras — Shorts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0}
+header{background:#222;color:#fff;padding:15px;text-align:center}
+.container{padding:15px}
+.card{background:#fff;padding:10px;margin:10px 0;border-radius:10px}
+input{width:100%;padding:10px;margin-top:10px}
+button{margin-top:10px;padding:10px;width:100%;background:#0a84ff;color:#fff;border:0;border-radius:8px}
+iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
+.msg{color:red;margin-top:6px}
+a{display:block;margin-top:12px;text-align:center}
+</style>
 </head>
 <body>
-<header>
-  <h1>Shorts</h1>
-  <nav>
-    <a href="feed.html">Feed</a>
-    <a href="fotos.html">Fotos</a>
-    <a href="perfil.html">Perfil</a>
-  </nav>
-</header>
+
+<header><h1>Shorts</h1></header>
 
 <div class="container">
-  <div class="card">
-    <p>Área para vídeos curtos (simples — incorpore do YouTube/TikTok).</p>
-    <input class="input" placeholder="Cole o link do vídeo">
-  </div>
+  <h3>Enviar Shorts (somente links com /shorts/)</h3>
+
+  <input id="inputShorts" placeholder="Cole o link do shorts aqui">
+  <button onclick="addShort()">Enviar</button>
+  <div id="msgShorts" class="msg"></div>
+
+  <div id="listaShorts"></div>
+
+  <a href="watch.html">Ir para /watch</a>
 </div>
+
+<script>
+function toEmbedShort(url){
+  try{
+    const u = new URL(url);
+    if(u.pathname.includes("/shorts/")){
+      const id = u.pathname.split("/shorts/")[1].replace("/", "");
+      return "https://www.youtube.com/embed/" + id;
+    }
+  }catch(e){}
+  return null;
+}
+
+function addShort(){
+  const url = document.getElementById("inputShorts").value.trim();
+  const msg = document.getElementById("msgShorts");
+  msg.textContent = "";
+
+  if(!url.includes("/shorts/")){
+    msg.textContent = "❌ Só é permitido link com /shorts/";
+    return;
+  }
+
+  const embed = toEmbedShort(url);
+  if(!embed){
+    msg.textContent = "❌ Link inválido";
+    return;
+  }
+
+  const box = document.createElement("div");
+  box.className = "card";
+  box.innerHTML = `<iframe src="${embed}" allowfullscreen></iframe>`;
+  document.getElementById("listaShorts").prepend(box);
+  document.getElementById("inputShorts").value = "";
+}
+</script>
+
 </body>
 </html>
