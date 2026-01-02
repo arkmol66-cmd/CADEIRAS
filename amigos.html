@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Amigos — Cadeira</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header>
+  <h1>Amigos</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="feed.html">Feed</a>
+    <a href="amigos.html">Amigos</a>
+    <a href="comunidades.html">Comunidades</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Adicionar amigo</h2>
+    <label>E-mail do amigo</label>
+    <input id="email" class="input" placeholder="ex: pessoa@email.com">
+
+    <button class="btn btn-primary" onclick="addFriend()">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <h2>Seus amigos</h2>
+    <div id="lista"></div>
+  </div>
+
+</div>
+
+<script>
+let amigos = JSON.parse(localStorage.getItem("amigos") || "[]");
+
+function salvar(){
+  localStorage.setItem("amigos", JSON.stringify(amigos));
+}
+
+function render(){
+  const box = document.getElementById("lista");
+  box.innerHTML = "";
+
+  if(amigos.length === 0){
+    box.innerHTML = "<p>Você ainda não tem amigos.</p>";
+    return;
+  }
+
+  amigos.forEach((a,i)=>{
+    const div = document.createElement("div");
+    div.className = "post";
+    div.innerHTML = `
+      <b>${a}</b>
+      <button class="btn" onclick="remover(${i})">remover</button>
+    `;
+    box.appendChild(div);
+  });
+}
+
+function addFriend(){
+  const email = document.getElementById("email").value.trim();
+  if(!email) return;
+
+  amigos.push(email);
+  salvar();
+  render();
+  document.getElementById("email").value = "";
+}
+
+function remover(i){
+  amigos.splice(i,1);
+  salvar();
+  render();
+}
+
+render();
+</script>
+
+</body>
+</html>
