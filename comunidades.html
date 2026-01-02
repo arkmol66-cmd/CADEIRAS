@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Comunidades — Cadeira</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Comunidades</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="feed.html">Feed</a>
+    <a href="amigos.html">Amigos</a>
+    <a href="comunidades.html">Comunidades</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Comunidades disponíveis</h2>
+
+    <div class="post" onclick="entrar('Tecnologia')">💻 Tecnologia</div>
+    <div class="post" onclick="entrar('Jogos')">🎮 Jogos</div>
+    <div class="post" onclick="entrar('Escola')">📚 Escola</div>
+    <div class="post" onclick="entrar('Arte')">🎨 Arte</div>
+  </div>
+
+  <div class="card" id="area" style="display:none">
+    <h2 id="titulo"></h2>
+
+    <div id="mensagens"></div>
+
+    <input id="texto" class="input" placeholder="Escreva algo…">
+    <button class="btn btn-primary" onclick="postar()">Postar</button>
+  </div>
+
+</div>
+
+<script>
+let atual = null;
+let dados = JSON.parse(localStorage.getItem("comunidades") || "{}");
+
+function salvar(){
+  localStorage.setItem("comunidades", JSON.stringify(dados));
+}
+
+function entrar(nome){
+  atual = nome;
+  if(!dados[nome]) dados[nome] = [];
+
+  document.getElementById("area").style.display = "block";
+  document.getElementById("titulo").textContent = "Comunidade — " + nome;
+  render();
+}
+
+function render(){
+  const box = document.getElementById("mensagens");
+  box.innerHTML = "";
+
+  dados[atual].forEach(m=>{
+    const div = document.createElement("div");
+    div.className = "post";
+    div.textContent = m;
+    box.appendChild(div);
+  });
+}
+
+function postar(){
+  let t = document.getElementById("texto").value.trim();
+  if(!t) return;
+
+  dados[atual].push(t);
+  salvar();
+  document.getElementById("texto").value = "";
+  render();
+}
+</script>
+
+</body>
+</html>
